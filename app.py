@@ -3,17 +3,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import math
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression
 
 # Function to display categorical feature visualizations
 def visualize_categorical_features(df, cf):
     st.write("### Visualizing Categorical Features")
     n = 2
     rows = math.ceil(len(cf) / n)
-    fig, axes = plt.subplots(rows, n, figsize=(15, 5 * rows))
+    fig, axes = plt.subplots(rows, n, figsize=(10, 5 * rows))
     axes = axes.flatten()
     for i, feature in enumerate(cf):
         sns.countplot(x=df[feature], ax=axes[i])
@@ -23,7 +19,7 @@ def visualize_categorical_features(df, cf):
     st.pyplot(fig)
 
     st.write("### Violin Plots")
-    fig, axes = plt.subplots(rows, n, figsize=(15, 5 * rows))
+    fig, axes = plt.subplots(rows, n, figsize=(10, 5 * rows))
     axes = axes.flatten()
     for i, feature in enumerate(cf):
         sns.violinplot(x=df[feature], y=df['Marks'], ax=axes[i])
@@ -37,7 +33,7 @@ def visualize_numeric_features(df, nf):
     st.write("### Numeric Features Distribution")
     n = 2
     rows = math.ceil(len(nf) / n)
-    fig, axes = plt.subplots(rows, n, figsize=(15, 5 * rows))
+    fig, axes = plt.subplots(rows, n, figsize=(10, 5 * rows))
     axes = axes.flatten()
     for i, feature in enumerate(nf):
         sns.histplot(df[feature], kde=True, ax=axes[i], color='blue', bins=30)
@@ -47,13 +43,11 @@ def visualize_numeric_features(df, nf):
     st.pyplot(fig)
 
     st.write("### Boxplots")
-    fig, axes = plt.subplots(rows, n, figsize=(15, 5 * rows))
+    fig, axes = plt.subplots(rows, n, figsize=(10, 5 * rows))
     axes = axes.flatten()
     for i, feature in enumerate(nf):
         sns.boxplot(x=df[feature], ax=axes[i], color='green')
         axes[i].set_title(f"Boxplot of {feature}")
-    for j in range(i + 1, len(axes)):
-        fig.delaxes(axes[j])
     st.pyplot(fig)
 
 # Function to visualize pairplots
@@ -63,12 +57,10 @@ def visualize_pairplots(df):
     st.pyplot(pairplot_fig)
 
 def main():
-    st.set_page_config(page_title="Student Marks Analysis", layout="wide")
-    st.title("Student Marks Analysis")
+    st.sidebar.header("Upload File")
+    uploaded_file = st.sidebar.file_uploader("Upload your dataset (CSV or Excel format)", type=["csv", "xlsx"])
 
-    uploaded_file = st.file_uploader("Upload your dataset (CSV or Excel format)", type=["csv", "xlsx"])
-
-    if uploaded_file:
+    if uploaded_file is not None:
         if uploaded_file.name.endswith('.csv'):
             df = pd.read_csv(uploaded_file)
         elif uploaded_file.name.endswith('.xlsx'):
@@ -77,8 +69,8 @@ def main():
             st.error("Unsupported file format.")
             return
 
-        st.write("### Uploaded Dataset")
-        st.write(df.head())
+        st.sidebar.write("### Uploaded Dataset Preview")
+        st.sidebar.write(df.head())
 
         target = 'Marks'
         features = [col for col in df.columns if col != target]
