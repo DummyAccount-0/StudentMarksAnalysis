@@ -9,7 +9,7 @@ def visualize_categorical_features(df, cf):
     st.write("### Visualizing Categorical Features")
     n = 2
     rows = math.ceil(len(cf) / n)
-    fig, axes = plt.subplots(rows, n, figsize=(400, 200 * rows))
+    fig, axes = plt.subplots(rows, n, figsize=(10, 5 * rows))
     axes = axes.flatten()
     for i, feature in enumerate(cf):
         sns.countplot(x=df[feature], ax=axes[i])
@@ -19,7 +19,7 @@ def visualize_categorical_features(df, cf):
     st.pyplot(fig)
 
     st.write("### Violin Plots")
-    fig, axes = plt.subplots(rows, n, figsize=(400, 200 * rows))
+    fig, axes = plt.subplots(rows, n, figsize=(10, 5 * rows))
     axes = axes.flatten()
     for i, feature in enumerate(cf):
         sns.violinplot(x=df[feature], y=df['Marks'], ax=axes[i])
@@ -33,7 +33,7 @@ def visualize_numeric_features(df, nf):
     st.write("### Numeric Features Distribution")
     n = 2
     rows = math.ceil(len(nf) / n)
-    fig, axes = plt.subplots(rows, n, figsize=(400, 200 * rows))
+    fig, axes = plt.subplots(rows, n, figsize=(10, 5 * rows))
     axes = axes.flatten()
     for i, feature in enumerate(nf):
         sns.histplot(df[feature], kde=True, ax=axes[i], color='blue', bins=30)
@@ -43,7 +43,7 @@ def visualize_numeric_features(df, nf):
     st.pyplot(fig)
 
     st.write("### Boxplots")
-    fig, axes = plt.subplots(rows, n, figsize=(400, 200 * rows))
+    fig, axes = plt.subplots(rows, n, figsize=(10, 5 * rows))
     axes = axes.flatten()
     for i, feature in enumerate(nf):
         sns.boxplot(x=df[feature], ax=axes[i], color='green')
