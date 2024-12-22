@@ -110,5 +110,29 @@ def main():
         else:
             st.write("Not enough features for a pairplot.")
 
+    # Footer at the bottom
+    footer()
+
+def footer():
+    st.markdown(
+        """
+        <style>
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f1f1f1;
+            text-align: center;
+            padding: 10px;
+        }
+        </style>
+        <div class="footer">
+            <p>Developed by Shadab Ali Shekh | HKBK College of Engineering</p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 if __name__ == "__main__":
     main()
