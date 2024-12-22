@@ -63,6 +63,7 @@ def visualize_pairplots(df):
     st.pyplot(pairplot_fig)
 
 def main():
+    st.set_page_config(page_title="Student Marks Analysis", layout="wide")
     st.title("Student Marks Analysis")
 
     uploaded_file = st.file_uploader("Upload your dataset (CSV or Excel format)", type=["csv", "xlsx"])
