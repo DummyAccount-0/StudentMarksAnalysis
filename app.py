@@ -101,7 +101,8 @@ def main():
             visualize_pairplots(df)
         else:
             st.write("Not enough features for a pairplot.")
-
+    else:
+        st.write("### Upload the file to Analyze")
 
 if __name__ == "__main__":
     main()
